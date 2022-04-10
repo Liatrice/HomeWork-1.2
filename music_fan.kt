@@ -8,23 +8,23 @@ fun main() {
     val maxBay: UInt = 10_000_00u
     var buyer: String = "meloman"
     val itemCount = readln().toUInt()
-    if (buyer == "meloman") { true
+    if (buyer == "meloman") {
+        true
     } else {
         false
     }
 
-
-    var totalPrice: UInt = PRICE * itemCount
-    if (totalPrice < minBuy) {
-        totalPrice
+    var totalPrice: UInt = (PRICE * itemCount) / 100u
+    val result = if (totalPrice < minBuy) {
+        totalPrice.toDouble()
     } else if (minBuy <= totalPrice) {
         totalPrice - DISCOUNTMIN
     } else if (totalPrice <= maxBay) {
         totalPrice - DISCOUNTMIN
     } else if (totalPrice > maxBay) {
-        (totalPrice.toDouble() * DISCOUNT)
+        (totalPrice.toDouble() - totalPrice.toDouble() * DISCOUNT)
     } else {
         totalPrice.toDouble() - (totalPrice.toDouble() * DISCOUNT) * MELOMAN
     }
-    print("total price ${totalPrice / 100u} руб.")
+    print("total price $result руб.")
 }
