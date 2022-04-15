@@ -6,25 +6,26 @@ const val PRICE: UInt = 100_00u
 fun main() {
     val minBuy: UInt = 1_000_00u
     val maxBay: UInt = 10_000_00u
-    var buyer: String = "meloman"
-    val itemCount = readln().toUInt()
-    if (buyer == "meloman") {
-        true
-    } else {
-        false
-    }
 
-    var totalPrice: UInt = (PRICE * itemCount) / 100u
-    val result = if (totalPrice < minBuy) {
-        totalPrice.toDouble()
-    } else if (minBuy <= totalPrice) {
+    //Сначала нужно определить является ли пользователь меломаном и подсчитать предварительную сумму покупки (в копейках):
+    val buyer: String = "meloman"
+    val meloman = buyer == "meloman"
+    val itemCount = readln().toUInt()
+    var totalPrice: UInt = PRICE * itemCount / 100u
+
+    //Затем сделать проверку на сумму покупки:
+    var result = if (totalPrice > maxBay) {
+        totalPrice - (totalPrice.toDouble() * DISCOUNT).toUInt()
+    } else if (totalPrice >= minBuy) {
         totalPrice - DISCOUNTMIN
-    } else if (totalPrice <= maxBay) {
-        totalPrice - DISCOUNTMIN
-    } else if (totalPrice > maxBay) {
-        (totalPrice.toDouble() - totalPrice.toDouble() * DISCOUNT)
     } else {
-        totalPrice.toDouble() - (totalPrice.toDouble() * DISCOUNT) * MELOMAN
+        totalPrice
+    }
+    //Затем к полученной сумме уже применить скидку меломана, как описано в задании:
+    if (meloman) {
+        result - (result.toDouble() * MELOMAN).toUInt()
+    } else {
+        result
     }
     print("total price $result руб.")
 }
